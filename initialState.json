@@ -1,0 +1,119 @@
+{
+	"products" : [
+		{
+			"name" : "pro1",
+			"category" : 1,
+			"price" : {
+				"beforeDiscount" : 1000,
+				"finalPrice" : 800
+			},
+			"shipping" : ["free" ,"withinAWeek" ,"withinTwoDays"],
+			"color" : ["#FF0000","#FF00FF","00FF00"],
+			"description" : `Lorem ipsum dolor sit amet, consectetur adipiscing 
+							elit. Ut vehicula dui non neque tempor, a cursus purus pellentesque.
+			 				Donec sollicitudin mattis dolor, sed elementum purus mollis vel. Cras
+			  				at malesuada quam, eget bibendum enim. Duis convallis augue ac dui lacinia
+			   				dignissim sit amet sed ante. Sed enim mi, pharetra in tincidunt facilisis,
+							dignissim vehicula purus. Nulla mi lectus, scelerisque nec mauris a, rutrum
+							 consectetur ligula. Aliquam quis interdum libero, in lacinia diam.`,
+			"tags" : ["tag1","tag2","tag3"],
+			"rating" : {
+				"currentRating" : 4.2,
+				"numberOfRates" : 255
+			},
+			"comments" : ["aaaaaaaaa!","bbbbbbbbbbbb2","ccccccccccc3"],
+			"photos" : ["a.jpg","a.jpg","a.jpg"]
+		},
+		{
+			"name" : "pro2",
+			"category" : 2,
+			"price" : {
+				"beforeDiscount" : 2000,
+				"finalPrice" : 1800
+			},
+			"shipping" : ["free" ,"withinAWeek" ,"withinTwoDays"],
+			"color" : ["#FF0000","#FF00FF","00FF00"],
+			"description" : `Lorem ipsum dolor sit amet, consectetur adipiscing 
+							elit. Ut vehicula dui non neque tempor, a cursus purus pellentesque.
+			 				Donec sollicitudin mattis dolor, sed elementum purus mollis vel. Cras
+			  				at malesuada quam, eget bibendum enim. Duis convallis augue ac dui lacinia
+			   				dignissim sit amet sed ante. Sed enim mi, pharetra in tincidunt facilisis,
+							dignissim vehicula purus. Nulla mi lectus, scelerisque nec mauris a, rutrum
+							 consectetur ligula. Aliquam quis interdum libero, in lacinia diam.`,
+			"tags" : ["tag1","tag2","tag3"],
+			"rating" : {
+				"currentRating" : 4.2,
+				"numberOfRates" : 255
+			},
+			"comments" : ["aaaaaaaaa!","bbbbbbbbbbbb2","ccccccccccc3"],
+			"photos" : ["a.jpg","a.jpg","a.jpg"]
+		},
+		{
+			"name" : "pro3",
+			"category" : 3,
+			"price" : {
+				"beforeDiscount" : 3000,
+				"finalPrice" : 2800
+			},
+			"shipping" : ["free" ,"withinAWeek" ,"withinTwoDays"],
+			"color" : ["#FF0000","#FF00FF","00FF00"],
+			"description" : `Lorem ipsum dolor sit amet, consectetur adipiscing 
+							elit. Ut vehicula dui non neque tempor, a cursus purus pellentesque.
+			 				Donec sollicitudin mattis dolor, sed elementum purus mollis vel. Cras
+			  				at malesuada quam, eget bibendum enim. Duis convallis augue ac dui lacinia
+			   				dignissim sit amet sed ante. Sed enim mi, pharetra in tincidunt facilisis,
+							dignissim vehicula purus. Nulla mi lectus, scelerisque nec mauris a, rutrum
+							 consectetur ligula. Aliquam quis interdum libero, in lacinia diam.`,
+			"tags" : ["tag1","tag2","tag3"],
+			"rating" : {
+				"currentRating" : 4.2,
+				"numberOfRates" : 255
+			},
+			"comments" : ["aaaaaaaaa!","bbbbbbbbbbbb2","ccccccccccc3"],
+			"images" : ["a.jpg","a.jpg","a.jpg"]
+		}
+	],
+	"categories" : [
+		{
+			"name" : "cate1",
+			"id" : 1,
+			"parentId" : 0,
+			"image" : "cat1.jpg"
+		},
+		{
+			"name" : "cate2",
+			"id" : 2,
+			"parentId" : 0,
+			"image" : "cat2.jpg"
+		},
+		{
+			"name" : "cate3",
+			"id" : 3,
+			"parentId" : 1,
+			"image" : "cat3.jpg"
+		}
+	],
+	"cart":{
+		"listOfAllProductsInCart" : [
+			{
+				"id" : 1,
+				"shippingPrice" : 200,
+				"selectedColor" : "#ff00ff",
+				"howManyUnits" : 2
+			}
+		],
+		"selectedPaymentMethod" : "Visa",
+		"address" : {
+			"province" : "BC",
+			"city" : "Burnaby",
+			"street" : "666 Cambridge",
+			"zip" : "S7N1L5"
+		}
+	},
+	"homePageComponents" : {
+		"featuredCategories" : [1,2,3],
+		"featuredProducts" : [1,2,3],
+		"todayDeals" : [1,2,3]
+	}
+
+}
