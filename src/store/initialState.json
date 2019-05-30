@@ -1,0 +1,31 @@
+{
+	"products" :[
+
+	],
+	"categories" : [
+	],
+	"cart":{
+		"listOfAllProductsInCart" : [
+			{
+				"id" : 1,
+				"shippingPrice" : 200,
+				"selectedColor" : "#ff00ff",
+				"howManyUnits" : 2
+			}
+		],
+		"selectedPaymentMethod" : "Visa",
+		"address" : {
+			"province" : "BC",
+			"city" : "Burnaby",
+			"street" : "666 Cambridge",
+			"zip" : "S7N1L5"
+		}
+	},
+	"homePageComponents" : {
+	}
+
+}
+
+
+
+

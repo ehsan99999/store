@@ -1,0 +1,65 @@
+import C from './constants'
+import fetch from 'isomorphic-fetch'
+let serverURL = "http://localhost:3001/?";
+
+
+export const fetchProductById = (productId) =>(dispatch , getState) =>{
+    fetch(serverURL + "action=fetchProductById&productId="+productId )
+    .then(reponse => reponse.json())
+    .then(res => {
+        dispatch({
+            type : C.PRODUCTS.FETCH_PRODUCT_BY_ID,
+            payload:res
+        });
+    })
+    .catch(err =>{
+        //TODO handel error
+        console.log(err);
+    })
+}
+
+export const fetchProductsByCategoryId = (categoryId) =>(dispatch,getState) =>{
+    fetch(serverURL + "action=fetchProductsByCategoryId&categoryId="+categoryId)
+    .then(response => response.json())
+    .then(res => {
+        dispatch({
+            type : C.PRODUCTS.FETCH_PRODUCTS_BY_CATEGORY_ID,
+            payload:res
+        });
+
+    })
+}
+
+export const fetchHomepageComponents = () =>(dispatch , getState) =>{
+    fetch(serverURL + "action=fetchHomepageComponents")
+    .then(reponse => reponse.json())
+    .then(res => {
+        dispatch({  
+            type : C.HOME_PAGE_COMPONENT.FETCH_HOMEPAGE_COMPONENTS,
+            payload:res
+        });
+        dispatch({
+            type : C.PRODUCTS.UPDATE_PRODUCTS_LIST,
+            payload:res.featuredProducts
+        });
+    })
+    .catch(err =>{
+        //TODO handel error
+        console.log(err);
+    })
+}
+export const fetchListOfCategories = () =>(dispatch , getState) =>{
+    fetch(serverURL + "action=fetchListOfCategories")
+    .then(reponse => reponse.json())
+    .then(res => {
+        console.log(res)
+        dispatch({  
+            type : C.CATEGORY.FETCH_LIST_OF_CATEGORIES,
+            payload:res
+        });
+    })
+    .catch(err =>{
+        //TODO handel error
+        console.log(err);
+    })
+}

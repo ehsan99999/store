@@ -1,0 +1,15 @@
+import initialState from './initialState.json'
+import appReducer from './reducers'
+import thunk from 'redux-thunk'
+import { createStore, applyMiddleware } from "redux"
+
+const consoleMessages = store => next => action => {
+    //console.log("old : ",JSON.stringify(store.getState()));
+    let results = next(action);
+    //console.log("new : ",JSON.stringify(store.getState()));
+    return results;
+}
+
+export default () =>{
+    return applyMiddleware(thunk,consoleMessages)(createStore)(appReducer,initialState)
+}
