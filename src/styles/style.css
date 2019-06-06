@@ -21,6 +21,9 @@ html, body{
   font-size: 1.1em !important;
 }
 
+.headerMargin{
+  margin-top:35px;
+}
 
 
 /* ------------Slider -------------- */
@@ -120,6 +123,8 @@ html, body{
 .ImgScaleDown {
   object-fit: scale-down;
   object-position: center; /* Center the image within the element */
+}
+.productCard img.img-fluid{
   height: 200px;
 }
 
@@ -208,6 +213,70 @@ hr.thickShortLine {
   border-top: 1px solid rgba(225, 0, 255, 1);
 }
 
+
+/* single product page */
+#productPageSlider .mainImg{
+  max-height: 400px;
+}
+#productPageSlider .thumb{
+  max-height: 200px;
+}
+
+.changeNumberOfItemsInCart {
+  background-color: #eaeaea;
+  height: 35px;
+  border:1px solid gray;
+  font-size:0.9rem;
+  width:90px;
+}
+.changeNumberOfItemsInCart button{
+  border:0px;
+  background-color: rgba(0, 0, 0, 0);
+  margin-top: 0px; 
+  
+}
+.changeNumberOfItemsInCart img{
+  width:10px;
+}
+.addToCartComponent, .CartFavItem{
+  height: 35px;
+  font-size:0.8rem;
+  cursor:pointer;
+
+}
+.addToCartComponent img{
+  width:10px;
+}
+
+.CartFavItem{
+  width:35px;
+  font-size:1.3rem;
+  background-color: #eaeaea;
+
+}
+.CartFavItem svg{ 
+  margin: 7px;
+}
+
+
+.singleProductPage .productTitle{
+  font-size: 1.8rem;
+}
+.singleProductPage .price{
+  font-size: 1.5rem;
+}
+
+#singleProductPageTab1 a, #singleProductPageTab2 a{
+  font-size: 0.9rem;
+  color: rgb(0, 0, 0);
+  padding-right: 1rem;
+  padding-left: 1rem;
+}
+
+
+.singleProductPage .tab-content{
+  font-size: 0.9rem;
+}
 
 
 

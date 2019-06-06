@@ -38,9 +38,20 @@ export const fetchHomepageComponents = () =>(dispatch , getState) =>{
             type : C.HOME_PAGE_COMPONENT.FETCH_HOMEPAGE_COMPONENTS,
             payload:res
         });
+        // get List of products from featuredProducts and todayDeals to save in store
+        let productsArray = [];
+        res.featuredProducts.map(category => {
+            let categoryKey = Object.keys(category)[0];
+            category[categoryKey].map(product => {
+                productsArray.push(product)
+            });
+        });
+        res.todayDeals.map(product => {
+            productsArray.push(product)
+        });
         dispatch({
             type : C.PRODUCTS.UPDATE_PRODUCTS_LIST,
-            payload:res.featuredProducts
+            payload:productsArray
         });
     })
     .catch(err =>{

@@ -3,7 +3,7 @@ import {combineReducers} from 'redux'
 export const products = (state = {},action)=>{
     switch(action.type){
         case C.PRODUCTS.FETCH_PRODUCT_BY_ID :
-            return state = action.payload;
+            return state = [{...state,...action.payload}];
         case C.PRODUCTS.FETCH_PRODUCTS_BY_CATEGORY_ID :
             return state = action.payload;
         case C.PRODUCTS.UPDATE_PRODUCTS_LIST :

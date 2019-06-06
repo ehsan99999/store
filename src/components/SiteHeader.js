@@ -10,7 +10,7 @@ class SiteHeader extends Component{
         return(
 
             <nav className="navbar navbar-expand-md navbar-light bg-light fixed-top">
-                <div className="container-fluid container">
+                <div className="container">
                     <a className="navbar-brand" href="index.html"><img src={logo} alt="Logo" /> </a>
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
                         <span className="navbar-toggler-icon" ></span>

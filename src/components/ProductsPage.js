@@ -9,13 +9,13 @@ const mapStateToProps = (state,props) =>{
     }
 }
   
-  const mapDispatchToProps = dispatch => {
-    return{
-        fetchProductsByCategoryId(categotyId){
-        dispatch(fetchProductsByCategoryId(categotyId))
-      }
+const mapDispatchToProps = dispatch => {
+return{
+    fetchProductsByCategoryId(categotyId){
+    dispatch(fetchProductsByCategoryId(categotyId))
     }
-  }
+}
+}
 
 class ProductsPage extends Component {
     componentDidMount(){
