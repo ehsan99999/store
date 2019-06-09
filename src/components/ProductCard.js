@@ -10,7 +10,6 @@ class ProductCard extends Component{
 	render(){
 		let productTitleLength = 16;
 		let product = this.props.product;
-		console.log(product.priceWas , product.priceIs)
 		let priceWas = (product.priceWas == -1)?
 			"":
 			<small><del>${product.priceWas}</del></small>

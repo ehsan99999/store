@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import  Rating  from "react-rating";
 import C from '../store/constants'
 import {connect } from 'react-redux'
-import {fetchProductById} from '../store/actions'
+import {fetchProductById , addItemToCart,toggleFavorite,fetchRelatedItemsByProductId} from '../store/actions'
 import  SiteHeader  from "./SiteHeader";
 import fullStar from '../img/fullStar.png'
 import halfStar from '../img/halfStar.png'
@@ -13,17 +13,21 @@ import minusG from '../img/minus-g.png'
 import addB from '../img/add-b.png'
 import addG from '../img/add-g.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus,faHeart,faCommentDots } from '@fortawesome/free-solid-svg-icons'
+import { faPlus,faHeart,faCommentDots,faCheck } from '@fortawesome/free-solid-svg-icons'
+import  FeaturedProducts  from "./FeaturedProducts";
+import  Foooter  from "./Foooter";
 
 const PRODUCT_IMG_URL = "http://gwf-demo.usask.ca/DummyServer/images/products/"
 
+
 const mapStateToProps = (state,props) =>{
-    console.log(state)
     let productId = parseInt(props.match.params.productId)
     return {
-        product : state.products.filter(product => {
-            return product.id == productId
-        })
+        products : state.products,
+        currrentProductId : productId,
+        listOfAllProductsInCart : state.cart.listOfAllProductsInCart,
+        favorites : state.favorites,
+
     }
   }
   
@@ -31,23 +35,69 @@ const mapStateToProps = (state,props) =>{
     return{
         fetchProductById(productId){
             dispatch(fetchProductById(productId))
+        },
+        addItemToCart(product){
+            dispatch(addItemToCart(product))
+        },
+        toggleFavorite(productId){
+            dispatch(toggleFavorite(productId))
+        },
+        fetchRelatedItemsByProductId(productId){
+            dispatch(fetchRelatedItemsByProductId(productId));
         }
     }
   }
 
 class SingleProductPage extends Component{
+    constructor(props){
+        super(props);
+        this.state = {numberOfUnits: 1 , shippingOption : 1 , areRelatedItemsFetched : false };
+        this.modifyNumberOfUnits.bind(this);
+        this.productId = parseInt(this.props.match.params.productId);
+
+    }
+    componentDidMount() {
+        if(!this.state.areRelatedItemsFetched){
+            this.props.fetchRelatedItemsByProductId(this.productId);
+            this.setState({areRelatedItemsFetched : true});
+        }
+    }
+    modifyNumberOfUnits = (action)=>{
+        switch (action) {
+            case "INCREMENT":
+                this.setState({
+                    numberOfUnits : this.state.numberOfUnits + 1
+                });
+                break;
+            case "DECREMENT":
+                if(this.state.numberOfUnits < 2)
+                    return;
+                this.setState({
+                    numberOfUnits : this.state.numberOfUnits - 1
+                });
+                break;
+        }
+
+    }
+    modifyShippingOption = (event) =>{
+        this.setState({shippingOption : parseInt(event.target.value)});
+    }
 
 
     render(){
+        let productId = parseInt(this.props.match.params.productId);
+        let product = this.props.products.filter(product => product.id === productId)[0];
 
-        if(this.props.product.length == 0){
-            let productId = this.props.match.params.productId;
+        if(product === undefined){
             this.props.fetchProductById(productId);
             return(
                 <img src="https://wpamelia.com/wp-content/uploads/2018/11/ezgif-2-6d0b072c3d3f.gif" />
             )
         }
-        let product = this.props.product[0];
+        let relatedProducts = this.props.products.filter(item => {
+            return ((item.category === product.category) && (item.id !== product.id))
+        });
+
         let priceWas = parseFloat(product.priceWas);
         let priceIs = parseFloat(product.priceIs);
 
@@ -58,6 +108,9 @@ class SingleProductPage extends Component{
         }
 
 
+        let isItemInCart = (this.props.listOfAllProductsInCart.filter(item => item.id === productId )
+                            .length > 0)? true:false;
+        let isFavorite = this.props.favorites.includes(productId);
 
         //TODO remove when we have real product specifications
         product.specifications = [
@@ -79,13 +132,50 @@ class SingleProductPage extends Component{
             parseInt(((priceIs * 19)/100))
         ];
 
-        let shippingOptionsJsx =[
-            <ul key="shippingOptionsJsx">
-                <li key="shippingOption1" >${shippingOptions[0]} -- Regular: within 10-15 days delivery</li>
-                <li key="shippingOption2" >${shippingOptions[1]} -- Fast: within 5-7 days delivery</li>
-                <li key="shippingOption3" >${shippingOptions[2]} -- Express: 2-day delivery </li>
-            </ul>
-        ];
+        let shippingOptionsJsx =(
+                        <div className="my-3 mx-4" >
+                            <div className="custom-control custom-radio">
+                                <input 
+                                    type="radio"
+                                    className="custom-control-input"
+                                    id="defaultChecked1"
+                                    name="defaultExampleRadios"
+                                    value={1} 
+                                    checked={this.state.shippingOption === 1}
+                                    onChange={this.modifyShippingOption}
+                                        />
+                                <label className="custom-control-label" htmlFor="defaultChecked1">
+                                    ${shippingOptions[0]} -- Regular: within 10-15 days delivery
+                                </label>
+                            </div>
+                            <div className="custom-control custom-radio">
+                                <input 
+                                    type="radio"
+                                    className="custom-control-input"
+                                    id="defaultChecked2" 
+                                    name="defaultExampleRadios"
+                                    value={2} 
+                                    checked={this.state.shippingOption === 2}
+                                    onChange={this.modifyShippingOption} />
+                                <label className="custom-control-label" htmlFor="defaultChecked2">
+                                    ${shippingOptions[1]} -- Fast: within 5-7 days delivery
+                                </label>
+                            </div>
+                            <div className="custom-control custom-radio">
+                                <input 
+                                    type="radio"
+                                    className="custom-control-input"
+                                    id="defaultChecked3"
+                                    name="defaultExampleRadios" 
+                                    value={3} 
+                                    checked={this.state.shippingOption === 3}
+                                    onChange={this.modifyShippingOption}/>
+                                <label className="custom-control-label" htmlFor="defaultChecked3">
+                                    ${shippingOptions[2]} -- Express: 2-day delivery
+                                </label>
+                            </div>
+                        </div>
+        );
         let returnPolicyJsx = <p>You can return a product for up to 30 days from the date you purchased it.
                                 Any product you return must be in the same condition you received it and in the original
                                 packaging. Please keep the receipt.</p>
@@ -110,6 +200,9 @@ class SingleProductPage extends Component{
         });
 
         let ratingVal =  (Math.random() * (5 - 3.5) + 3.5).toFixed(1);
+
+
+
 
         return(
             <div className="singleProductPage">
@@ -153,13 +246,26 @@ class SingleProductPage extends Component{
 
 
                     <div id="addToCartModule" className="container">
-                        <ChangeNumberOfProductsInCart numberOfItem={1} />
+                        <ChangeNumberOfUnitsInCart modifyNumberOfUnits={this.modifyNumberOfUnits} numberOfUnits={this.state.numberOfUnits} />
 
-                        <a className="addToCartComponent float-left rounded-pill align-middle bg-success text-white px-3 py-2" >
-                            <FontAwesomeIcon icon={faPlus} className="text-white" /> Add to Cart
+                        <a 
+                            className={`addToCartComponent float-left rounded-pill align-middle  text-white px-3 py-2 ${(isItemInCart)? " bg-primary " : " bg-success "}`}
+                            onClick={()=>{
+                                    if(!isItemInCart)
+                                        this.props.addItemToCart({
+                                                id : productId,
+                                                numberOfUnits: this.state.numberOfUnits,
+                                                shippingOption : this.state.shippingOption
+                                            })
+                                    }}
+                         >
+                                {(isItemInCart)? 
+                                            (<div><FontAwesomeIcon icon={faCheck} className="text-white" /> Added to Cart</div>):
+                                            (<div><FontAwesomeIcon icon={faPlus} className="text-white" /> Add to Cart</div>)}
+                            
                         </a>
-                        <a className="CartFavItem float-left mx-2 rounded-circle align-middle " >
-                            <FontAwesomeIcon icon={faHeart} className="text-secondary" />
+                        <a onClick={() => this.props.toggleFavorite(productId)} className="CartFavItem float-left mx-2 rounded-circle align-middle " >
+                            <FontAwesomeIcon icon={faHeart} className={(isFavorite)? "text-danger":"text-secondary"}  />
                         </a>
                     </div>
 
@@ -182,6 +288,12 @@ class SingleProductPage extends Component{
                     </div>
                 </div>
             </div>
+                <div className="container-fluid" > 
+                    <FeaturedProducts  products = {relatedProducts} title="Related Products" ></FeaturedProducts>
+
+                </div>
+                <Foooter />
+
             
             </div>
         )
@@ -189,14 +301,13 @@ class SingleProductPage extends Component{
 }
 
 
-function ChangeNumberOfProductsInCart(props) {
-    console.log(props)
+function ChangeNumberOfUnitsInCart({numberOfUnits,modifyNumberOfUnits}) {
     return (
         <div className="changeNumberOfItemsInCart float-left rounded-pill align-middle mr-3 pt-1" >
             <center>
-                <button className="pl-2 align-middle"><img src={minusB} /></button>
-                <b className="px-2 ">01</b>
-                <button className="pr-2"><img src={addB} /></button>
+                <button onClick={() => modifyNumberOfUnits('DECREMENT')} className="pl-2 align-middle"><img src={minusB} /></button>
+                <b className="px-2 ">{(numberOfUnits > 9)? numberOfUnits : "0"+numberOfUnits}</b>
+                <button  onClick={() => modifyNumberOfUnits('INCREMENT')} className="pr-2"><img src={addB} /></button>
             </center>
         </div>
     )

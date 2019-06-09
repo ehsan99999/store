@@ -45,9 +45,15 @@ const mapStateToProps = (state,props) =>{
               <SiteHeader />
               <MainSlider  slides = {this.props.homePageComponents.mainSlider} />
               <Jumbotron />
-              <FeaturedProducts  products = {this.props.homePageComponents.todayDeals}>{JSON.stringify(this.props.homePageComponents)}</FeaturedProducts>
-              <ProductsTabs  products = {this.props.homePageComponents.featuredProducts}>{JSON.stringify(this.props.homePageComponents)}</ProductsTabs>
-              <FeaturedCategories  categories = {this.props.homePageComponents.categories}>{JSON.stringify(this.props.homePageComponents)}</FeaturedCategories>
+              <FeaturedProducts
+                            products = {this.props.homePageComponents.todayDeals}
+                            title="New Arrivals"
+                            description = "Nibh venenatis cras sed felis eget. Posuere sollicitudin aliquam ultrices sagittis orci.
+                            Sapien faucibus et molestie ac feugiat."
+                            >
+              </FeaturedProducts>
+              <ProductsTabs  products = {this.props.homePageComponents.featuredProducts}></ProductsTabs>
+              <FeaturedCategories  categories = {this.props.homePageComponents.categories}></FeaturedCategories>
               <hr/>
               <ThreeColumnSection  />
               <hr/>

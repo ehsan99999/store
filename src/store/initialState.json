@@ -5,14 +5,7 @@
 	"categories" : [
 	],
 	"cart":{
-		"listOfAllProductsInCart" : [
-			{
-				"id" : 1,
-				"shippingPrice" : 200,
-				"selectedColor" : "#ff00ff",
-				"howManyUnits" : 2
-			}
-		],
+		"listOfAllProductsInCart" : [],
 		"selectedPaymentMethod" : "Visa",
 		"address" : {
 			"province" : "BC",
@@ -21,6 +14,7 @@
 			"zip" : "S7N1L5"
 		}
 	},
+	"favorites":[10,15,20,50,506,65,42],
 	"homePageComponents" : {
 	}
 

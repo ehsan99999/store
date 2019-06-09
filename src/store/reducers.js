@@ -3,7 +3,9 @@ import {combineReducers} from 'redux'
 export const products = (state = {},action)=>{
     switch(action.type){
         case C.PRODUCTS.FETCH_PRODUCT_BY_ID :
-            return state = [{...state,...action.payload}];
+            return state = [...state,action.payload];
+        case C.PRODUCTS.FETCH_RELATED_ITEMS_BY_PRODUCT_ID :
+            return state = [...state,...action.payload];
         case C.PRODUCTS.FETCH_PRODUCTS_BY_CATEGORY_ID :
             return state = action.payload;
         case C.PRODUCTS.UPDATE_PRODUCTS_LIST :
@@ -17,7 +19,13 @@ export const products = (state = {},action)=>{
 
 
 export const cart = (state = {}, action) =>{
-    return state;
+    switch (action.type) {
+        case C.CART.ADD_TO_CART:
+            return{...state,listOfAllProductsInCart:[...state.listOfAllProductsInCart,action.payload]}
+            //return {...state,listOfAllProductsInCart,action.payload}
+        default:
+            return state;
+    }
 }
 
 export const homePageComponents = (state ={}, action) =>{
@@ -40,11 +48,24 @@ export const categories = (state ={}, action) =>{
 
     
 }
+export const favorites = (state ={}, action) =>{
+    switch(action.type){
+        case C.FAVORITES.ADD_TO_FAVORITES :
+            return state = [...state,action.payload];
+        case C.FAVORITES.REMOVE_FROM_FAVORITES :
+            return state = state.filter(fav => fav !== action.payload);
+        default:
+            return state;
+    }
+
+    
+}
 
 export default combineReducers({
     products,
     categories,
     cart,
+    favorites,
     homePageComponents
 
 

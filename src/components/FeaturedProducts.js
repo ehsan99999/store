@@ -11,20 +11,33 @@ class FeaturedProducts extends Component{
 
             )
         });
+        let titleJsx = (this.props.title === undefined)?
+                            (<div></div>) :
+                            (
+                                <div className="col-12">
+                                    <h2 className="display-6 text-uppercase">{this.props.title}</h2>
+                                </div>
+                            );
+        
 
+
+        let descriptionJsx = (this.props.description === undefined)? 
+                                (<div></div>):
+                                (
+                                    <div className="col-12">
+                                        <p className="lead">{this.props.description} </p>
+                                    </div>
+                                );
+
+        
+        
         return(
             <div>
             <div className="container-fluid">
                 <div className="row welcome text-center">
-                    <div className="col-12">
-                        <h2 className="display-6 text-uppercase">New Arrivals </h2>
-                    </div>
-                    <div className="col-12">
-                        <p className="lead">
-                            Nibh venenatis cras sed felis eget. Posuere sollicitudin aliquam ultrices sagittis orci.
-                            Sapien faucibus et molestie ac feugiat.
-                        </p>
-                    </div>
+                    {titleJsx}
+                    {descriptionJsx}
+
                 </div>
             </div>
             <div className="container-fluid padding">

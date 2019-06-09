@@ -17,6 +17,31 @@ export const fetchProductById = (productId) =>(dispatch , getState) =>{
         console.log(err);
     })
 }
+export const addItemToCart = (product) =>(dispatch , getState) =>{
+    dispatch({
+        type : C.CART.ADD_TO_CART,
+        payload:product
+    });
+}
+export const toggleFavorite = (productId) =>(dispatch , getState) =>{
+    if(getState().favorites.includes(productId)){
+        dispatch({
+            type : C.FAVORITES.REMOVE_FROM_FAVORITES,
+            payload:productId
+        });
+    }else{
+        dispatch({
+            type : C.FAVORITES.ADD_TO_FAVORITES,
+            payload:productId
+        });
+    }
+
+}
+
+
+
+
+
 
 export const fetchProductsByCategoryId = (categoryId) =>(dispatch,getState) =>{
     fetch(serverURL + "action=fetchProductsByCategoryId&categoryId="+categoryId)
@@ -24,6 +49,17 @@ export const fetchProductsByCategoryId = (categoryId) =>(dispatch,getState) =>{
     .then(res => {
         dispatch({
             type : C.PRODUCTS.FETCH_PRODUCTS_BY_CATEGORY_ID,
+            payload:res
+        });
+
+    })
+}
+export const fetchRelatedItemsByProductId = (productId) =>(dispatch,getState) =>{
+    fetch(serverURL + "action=fetchRelatedItemsByProductId&productId="+productId)
+    .then(response => response.json())
+    .then(res => {
+        dispatch({
+            type : C.PRODUCTS.FETCH_RELATED_ITEMS_BY_PRODUCT_ID,
             payload:res
         });
 
