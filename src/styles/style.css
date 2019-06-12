@@ -278,6 +278,64 @@ hr.thickShortLine {
   font-size: 0.9rem;
 }
 
+/* ---------- cartPage --------------- */
+.cartPage #productsInCart .productThumb{
+  width:100px;
+  height: 100px;
+}
+.cartPage #selectShippingMode{
+  width: 150px;
+}
+.cartPage thead{
+  background-color: #ebfcff;
+}
+.cartPage thead th{
+  font-weight: normal;
+  font-size: 0.9rem;
+}
+.cartPage .fontAwesomeIcon{
+  font-size: 0.7rem;
+}
+.cartPage .addressSelect ul{
+  list-style-type: none;
+  margin: 0px;
+  padding:0px;
+}
+.cartPage .addressCard {
+  margin: 0px 5px;
+  padding:0px;
+  max-width: 200px;
+}
+.cartPage .checkMark {
+  margin-left:10px;
+}
+.cartPage .card-body {
+  margin: 15px;
+  padding:0px;
+}
+
+.font12rem{
+  font-size: 1.2rem;
+}
+.font10rem{
+  font-size: 1rem;
+}
+.font09rem{
+  font-size: 0.9rem;
+}
+.font08rem{
+  font-size: 0.8rem;
+}
+.font07rem{
+  font-size: 0.7rem;
+}
+
+.btn span.glyphicon {    			
+	opacity: 0;				
+}
+.btn.active span.glyphicon {				
+	opacity: 1;				
+}
 
 
 [class^="col-"]{

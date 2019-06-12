@@ -18,7 +18,7 @@ const Testimonials = () => {
 				</ol>
                 <div className="carousel-inner">
                     <div className="carousel-item active px-1 py-1">
-                        <img src={face1} className="testimoniAvatar rounded-circle d-flex justify-content-start" />
+                        <img src={face1} className="testimoniAvatar rounded-circle d-flex justify-content-start" alt="Jain Doe - " />
                         <blockquote className="blockquote text-left pxy-2 pb-5">
                                 <p className="mb-0" >non enim praesent elementum facilisis leo vel fringilla est ullamcorper eget nulla facilisi
                                         etiam dignissim diam quis enim lobortis scelerisque fermentum dui faucibus in ornare.</p>
@@ -26,7 +26,7 @@ const Testimonials = () => {
                         </blockquote>
                     </div>
                     <div className="carousel-item  px-1 py-1">
-                        <img src={face2} className="testimoniAvatar rounded-circle d-flex justify-content-start" />
+                        <img src={face2} className="testimoniAvatar rounded-circle d-flex justify-content-start" alt="Jole Doe - "/>
                         <blockquote className="blockquote text-left pxy-2 pb-5">
                                 <p className="mb-0" >tincidunt tortor aliquam nulla facilisi cras fermentum odio eu feugiat pretium
                                         nibh ipsum consequat nisl lectus quam id.</p>
@@ -34,7 +34,7 @@ const Testimonials = () => {
                         </blockquote>
                     </div>
                     <div className="carousel-item  px-1 py-1">
-                        <img src={face3} className="testimoniAvatar rounded-circle d-flex justify-content-start" />
+                        <img src={face3} className="testimoniAvatar rounded-circle d-flex justify-content-start" alt="Jhon Doe - "/>
                         <blockquote className="blockquote text-left pxy-2 pb-5">
                                 <p className="mb-0" >turpis in eu mi bibendum congue quisque egestas diam in arcu
                                         cursus euismod quis viverra nibh cras pulvinar.</p>

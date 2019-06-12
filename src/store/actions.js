@@ -18,9 +18,23 @@ export const fetchProductById = (productId) =>(dispatch , getState) =>{
     })
 }
 export const addItemToCart = (product) =>(dispatch , getState) =>{
+    console.log(product)
     dispatch({
         type : C.CART.ADD_TO_CART,
         payload:product
+    });
+}
+export const updateNumberOfUnitsAndShippingMethodForOneItemInCart = (product) =>(dispatch , getState) =>{
+    console.log(product)
+    dispatch({
+        type : C.CART.UPDATE_NUMBER_OF_UNITS_AND_SHIPPING_METHOD_FOR_ONE_ITEM_IN_CART,
+        payload:product
+    });
+}
+export const removeItemFromCart = (productId) =>(dispatch , getState) =>{
+    dispatch({
+        type : C.CART.DELETE_ONE_FROM_CART,
+        payload:productId
     });
 }
 export const toggleFavorite = (productId) =>(dispatch , getState) =>{

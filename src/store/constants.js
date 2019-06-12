@@ -34,6 +34,7 @@ const constants = {
         ADD_TO_CART : "ADD_TO_CART",
         IS_IN_CART : "IS_IN_CART",
         LOAD_ITEMS_IN_CART : "LOAD_ITEMS_IN_CART",
+        UPDATE_NUMBER_OF_UNITS_AND_SHIPPING_METHOD_FOR_ONE_ITEM_IN_CART : "UPDATE_NUMBER_OF_UNITS_AND_SHIPPING_METHOD_FOR_ONE_ITEM_IN_CART",
         CHANGE_NUMBER_OF_REQUESTED_UNITS : "CHANGE_NUMBER_OF_REQUESTED_UNITS",
         CALCULATE_SHIPPING_PRICE : "CALCULATE_SHIPPING_PRICE",
         CALCULATE_TAX : "CALCULATE_TAX",
@@ -53,6 +54,10 @@ const constants = {
     },
     STORE_SETTINGS :{
         IMAGES_URL : "http://gwf-demo.usask.ca/DummyServer/images/"
+    },
+    OTHERS:{
+        PRODUCT_IMG_URL : "http://gwf-demo.usask.ca/DummyServer/images/products/"
+
     }
 }
 

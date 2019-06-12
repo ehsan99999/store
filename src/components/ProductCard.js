@@ -10,7 +10,7 @@ class ProductCard extends Component{
 	render(){
 		let productTitleLength = 16;
 		let product = this.props.product;
-		let priceWas = (product.priceWas == -1)?
+		let priceWas = (product.priceWas === -1)?
 			"":
 			<small><del>${product.priceWas}</del></small>
 
@@ -20,7 +20,7 @@ class ProductCard extends Component{
 		return (
 				<div  key={product.id} className="productCard col-sm-6 col-md-3 ">
 					<div className="card" >
-						<NavLink product={product} to={`product/${product.id}`}> 
+						<NavLink product={product} exact to={`product/${product.id}`}> 
 							<img className="card-img-top ImgScaleDown img-fluid" src={C.STORE_SETTINGS.IMAGES_URL + "products/"+product.images[0]} alt={productTitle} />
 							<div className="card-body">
 								<div className="d-flex flex-row pb-1">

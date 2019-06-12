@@ -5,16 +5,60 @@
 	"categories" : [
 	],
 	"cart":{
-		"listOfAllProductsInCart" : [],
+		"listOfAllProductsInCart" : [
+			{
+					"id": 56,
+					"numberOfUnits": 1,
+					"price": 2629,
+					"productImage": "81%2BpgHhjBML._SX679_.jpg",
+					"productTitle": "Breville BREBTM800XL Tea Maker",
+					"shippingOption": 1
+				},
+			
+			{
+					"id": 71,
+					"numberOfUnits": 3,
+					"price": "299.00",
+					"productImage": "61uFaP0Uk%2BL._SY550_.jpg",
+					"productTitle": "Miele 41CAE005CDN C1 Canister Vacuum Compact Obsidian Black",
+					"shippingOption": 2
+				},
+			
+			{
+							"id": 1,
+						"numberOfUnits": 2,
+						"price": 93,
+						"productImage": "71DCB9G8zwL._SX679_.jpg",
+						"productTitle": "nonda ZUS Smart Vehicle Health Monitor, Wireless OBD2 Car Code Reader Scan Tool, OBD with App, World’s First Predictive Safety Center Analyzing Historical Engine Data for Potential Issues",
+						"shippingOption": 3
+					}
+
+		],
 		"selectedPaymentMethod" : "Visa",
-		"address" : {
-			"province" : "BC",
-			"city" : "Burnaby",
-			"street" : "666 Cambridge",
-			"zip" : "S7N1L5"
-		}
+		"address" : [
+						{
+							"province" : "British Colombia",
+							"city" : "Vancouver",
+							"street" : "216 Cambridge",
+							"zip" : "S8N165"
+						},
+						{
+							"province" : "British Colombia",
+							"city" : "Vancouver",
+							"street" : "110 Oxford",
+							"zip" : "S7N1L5"
+						},
+						{
+							"province" : "British Colombia",
+							"city" : "Vancouver",
+							"street" : "306 Berkley",
+							"zip" : "V7N3L9"
+						}
+					]
+
+		
 	},
-	"favorites":[10,15,20,50,506,65,42],
+	"favorites":[10,15,20,50,56,65,42],
 	"homePageComponents" : {
 	}
 

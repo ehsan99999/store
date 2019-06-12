@@ -1,6 +1,4 @@
 import React, { Component }  from 'react';
-import { NavLink } from "react-router-dom";
-import C from '../store/constants'
 import ProductCard from './ProductCard'
 
 class ProductsTabs extends Component{
@@ -17,13 +15,13 @@ class ProductsTabs extends Component{
         let productsListString = this.props.products.map((category,index) => {
             let categoryKey = Object.keys(category)[0];
             let productsTabsJsx = category[categoryKey].map(product => {
-                let priceWas = (product.priceWas > -1)?
-                    <p className="priceIs" >$CAD {product.priceWas}</p>:
-                     "";
+                // let priceWas = (product.priceWas > -1)?
+                //     <p className="priceIs" >$CAD {product.priceWas}</p>:
+                //      "";
 
-                let productTitle = (product.productTitle.length > 15)? 
-                        product.productTitle.substr(0,14)+"..." :
-                        product.productTitle;
+                // let productTitle = (product.productTitle.length > 15)? 
+                //         product.productTitle.substr(0,14)+"..." :
+                //         product.productTitle;
                 
                 return(
                     <ProductCard key={product.id}  product = {product} />

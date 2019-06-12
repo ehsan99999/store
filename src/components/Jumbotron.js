@@ -12,7 +12,7 @@ const Jumbotron = () => {
                     </p>
                 </div>
                 <div className="callToActionDiv col-xs-12 col-sm-12 col-md-3  col-lg-3 col-xl-2 my-auto text-center">
-                    <a href="#"><button className="btn btn-outline-secondary " type="button">Take Action</button></a>
+                    <a href="#callToAction"><button className="btn btn-outline-secondary " type="button">Take Action</button></a>
                 </div>
             </div>
         </div>

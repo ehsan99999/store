@@ -22,7 +22,19 @@ export const cart = (state = {}, action) =>{
     switch (action.type) {
         case C.CART.ADD_TO_CART:
             return{...state,listOfAllProductsInCart:[...state.listOfAllProductsInCart,action.payload]}
-            //return {...state,listOfAllProductsInCart,action.payload}
+        case C.CART.DELETE_ONE_FROM_CART:
+            return {...state,listOfAllProductsInCart: state.listOfAllProductsInCart.filter(item => item.id !== action.payload)}
+        case C.CART.UPDATE_NUMBER_OF_UNITS_AND_SHIPPING_METHOD_FOR_ONE_ITEM_IN_CART:
+            let newListOfProductsInCart = state.listOfAllProductsInCart.map(product =>{
+                if(product.id === action.payload.id){
+                    return action.payload;
+                }else{
+                    return product
+                }
+            });
+            console.log(newListOfProductsInCart)
+            return{...state,listOfAllProductsInCart:[...newListOfProductsInCart]}
+
         default:
             return state;
     }

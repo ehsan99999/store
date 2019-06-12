@@ -1,23 +1,18 @@
 import React, { Component }  from 'react';
-import { NavLink } from "react-router-dom";
 import  Rating  from "react-rating";
 import C from '../store/constants'
 import {connect } from 'react-redux'
-import {fetchProductById , addItemToCart,toggleFavorite,fetchRelatedItemsByProductId} from '../store/actions'
+import {fetchProductById , addItemToCart,toggleFavorite,fetchRelatedItemsByProductId , removeItemFromCart} from '../store/actions'
 import  SiteHeader  from "./SiteHeader";
 import fullStar from '../img/fullStar.png'
-import halfStar from '../img/halfStar.png'
 import emptyStar from '../img/emptyStar.png'
-import minusB from '../img/minus-b.png'
-import minusG from '../img/minus-g.png'
-import addB from '../img/add-b.png'
-import addG from '../img/add-g.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus,faHeart,faCommentDots,faCheck } from '@fortawesome/free-solid-svg-icons'
+import { faPlus,faHeart,faCheck } from '@fortawesome/free-solid-svg-icons'
 import  FeaturedProducts  from "./FeaturedProducts";
+import  ChangeNumberOfUnitsInCart  from "./miniComponents/ChangeNumberOfUnitsInCart";
 import  Foooter  from "./Foooter";
 
-const PRODUCT_IMG_URL = "http://gwf-demo.usask.ca/DummyServer/images/products/"
+const PRODUCT_IMG_URL = C.OTHERS.PRODUCT_IMG_URL;
 
 
 const mapStateToProps = (state,props) =>{
@@ -27,6 +22,7 @@ const mapStateToProps = (state,props) =>{
         currrentProductId : productId,
         listOfAllProductsInCart : state.cart.listOfAllProductsInCart,
         favorites : state.favorites,
+        isItemInCart : (state.cart.listOfAllProductsInCart.filter(item => item.id === productId ).length > 0)? true:false,
 
     }
   }
@@ -38,6 +34,9 @@ const mapStateToProps = (state,props) =>{
         },
         addItemToCart(product){
             dispatch(addItemToCart(product))
+        },
+        removeItemFromCart(product){
+            dispatch(removeItemFromCart(product))
         },
         toggleFavorite(productId){
             dispatch(toggleFavorite(productId))
@@ -63,6 +62,7 @@ class SingleProductPage extends Component{
         }
     }
     modifyNumberOfUnits = (action)=>{
+        //TODO UPDATE THE CART AFTER CHANGE IN NUMBER
         switch (action) {
             case "INCREMENT":
                 this.setState({
@@ -82,7 +82,23 @@ class SingleProductPage extends Component{
     modifyShippingOption = (event) =>{
         this.setState({shippingOption : parseInt(event.target.value)});
     }
+    cartAddRemoveProduct = (product) => {
+        if(this.props.isItemInCart){
+            this.props.removeItemFromCart({
+                id : product.id
+            });
+        }else{
+            this.props.addItemToCart({
+                id : product.id,
+                productImage : product.images[0],
+                productTitle : product.productTitle,
+                price : product.priceIs,
+                numberOfUnits: this.state.numberOfUnits,
+                shippingOption : this.state.shippingOption
+            });
+        }
 
+    }
 
     render(){
         let productId = parseInt(this.props.match.params.productId);
@@ -107,9 +123,6 @@ class SingleProductPage extends Component{
             priceWas = tempPrice;
         }
 
-
-        let isItemInCart = (this.props.listOfAllProductsInCart.filter(item => item.id === productId )
-                            .length > 0)? true:false;
         let isFavorite = this.props.favorites.includes(productId);
 
         //TODO remove when we have real product specifications
@@ -202,7 +215,7 @@ class SingleProductPage extends Component{
         let ratingVal =  (Math.random() * (5 - 3.5) + 3.5).toFixed(1);
 
 
-
+        console.log(this.props)
 
         return(
             <div className="singleProductPage">
@@ -246,20 +259,20 @@ class SingleProductPage extends Component{
 
 
                     <div id="addToCartModule" className="container">
-                        <ChangeNumberOfUnitsInCart modifyNumberOfUnits={this.modifyNumberOfUnits} numberOfUnits={this.state.numberOfUnits} />
+                        <ChangeNumberOfUnitsInCart 
+                            productId={product.id} 
+                            modifyNumberOfUnits={this.modifyNumberOfUnits}
+                            numberOfUnits={this.state.numberOfUnits}
+                          />
 
                         <a 
-                            className={`addToCartComponent float-left rounded-pill align-middle  text-white px-3 py-2 ${(isItemInCart)? " bg-primary " : " bg-success "}`}
-                            onClick={()=>{
-                                    if(!isItemInCart)
-                                        this.props.addItemToCart({
-                                                id : productId,
-                                                numberOfUnits: this.state.numberOfUnits,
-                                                shippingOption : this.state.shippingOption
-                                            })
-                                    }}
+                            className={`addToCartComponent float-left rounded-pill align-middle  text-white px-3 py-2 ${(this.props.isItemInCart)? " bg-primary " : " bg-success "}`}
+                            onClick={
+
+                                    () => this.cartAddRemoveProduct(product)
+                                    }
                          >
-                                {(isItemInCart)? 
+                                {(this.props.isItemInCart)? 
                                             (<div><FontAwesomeIcon icon={faCheck} className="text-white" /> Added to Cart</div>):
                                             (<div><FontAwesomeIcon icon={faPlus} className="text-white" /> Add to Cart</div>)}
                             
@@ -301,17 +314,7 @@ class SingleProductPage extends Component{
 }
 
 
-function ChangeNumberOfUnitsInCart({numberOfUnits,modifyNumberOfUnits}) {
-    return (
-        <div className="changeNumberOfItemsInCart float-left rounded-pill align-middle mr-3 pt-1" >
-            <center>
-                <button onClick={() => modifyNumberOfUnits('DECREMENT')} className="pl-2 align-middle"><img src={minusB} /></button>
-                <b className="px-2 ">{(numberOfUnits > 9)? numberOfUnits : "0"+numberOfUnits}</b>
-                <button  onClick={() => modifyNumberOfUnits('INCREMENT')} className="pr-2"><img src={addB} /></button>
-            </center>
-        </div>
-    )
-}
+
 function ProductPageSlider({product}) {
     let productThumbsJsx = product.images.map((image,index) =>{
         let active = (index == 0)? " active " : "";
