@@ -18,7 +18,7 @@ class ProductCard extends Component{
 					product.productTitle.substr(0,(productTitleLength-1))+"..." :
 					product.productTitle;
 		return (
-				<div  key={product.id} className="productCard col-sm-6 col-md-3 ">
+				<div  key={product.id} className="productCard col-sm-6 col-md-4 col-lg-3 my-2 ">
 					<div className="card" >
 						<NavLink product={product} exact to={`product/${product.id}`}> 
 							<img className="card-img-top ImgScaleDown img-fluid" src={C.STORE_SETTINGS.IMAGES_URL + "products/"+product.images[0]} alt={productTitle} />

@@ -60,6 +60,11 @@
 	},
 	"favorites":[10,15,20,50,56,65,42],
 	"homePageComponents" : {
+	},
+	"view" : {
+		"selectedCategory" : -1 , 
+		"loadedProductsOffset" : 0
+		
 	}
 
 }

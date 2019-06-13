@@ -7,9 +7,12 @@ export const products = (state = {},action)=>{
         case C.PRODUCTS.FETCH_RELATED_ITEMS_BY_PRODUCT_ID :
             return state = [...state,...action.payload];
         case C.PRODUCTS.FETCH_PRODUCTS_BY_CATEGORY_ID :
-            return state = action.payload;
+            let newProductsList = [...state , ...action.payload];
+            return newProductsList
         case C.PRODUCTS.UPDATE_PRODUCTS_LIST :
             return state = action.payload;
+        case C.PRODUCTS.FLUSH_PRODUCTS_ARRAY :
+            return [];
         default:
             return state;
     }
@@ -72,13 +75,25 @@ export const favorites = (state ={}, action) =>{
 
     
 }
+export const view = (state ={} , action) =>{
+    switch(action.type){
+        case C.VIEW.SELECTED_CATEGORY:
+            console.log(action.payload);
+            return state = {...state,selectedCategory:action.payload} 
+        case C.VIEW.LOADED_PRODUCTS_OFFSET:
+            return state = {...state,loadedProductsOffset:action.payload} 
+        default:
+                return state;
+        }
+}
 
 export default combineReducers({
     products,
     categories,
     cart,
     favorites,
-    homePageComponents
+    homePageComponents,
+    view
 
 
 });

@@ -4,13 +4,13 @@ import C from '../store/constants'
 import {connect } from 'react-redux'
 import {fetchProductById , addItemToCart,toggleFavorite,fetchRelatedItemsByProductId , removeItemFromCart} from '../store/actions'
 import  SiteHeader  from "./SiteHeader";
+import  Foooter  from "./Foooter";
 import fullStar from '../img/fullStar.png'
 import emptyStar from '../img/emptyStar.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus,faHeart,faCheck } from '@fortawesome/free-solid-svg-icons'
 import  FeaturedProducts  from "./FeaturedProducts";
 import  ChangeNumberOfUnitsInCart  from "./miniComponents/ChangeNumberOfUnitsInCart";
-import  Foooter  from "./Foooter";
 
 const PRODUCT_IMG_URL = C.OTHERS.PRODUCT_IMG_URL;
 

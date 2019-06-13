@@ -53,12 +53,33 @@ export const toggleFavorite = (productId) =>(dispatch , getState) =>{
 }
 
 
+export const setSelectedCategory = (categoryId) =>(dispatch , getState) =>{
+    console.log("setSelectedCategory")
+    dispatch({
+        type : C.VIEW.SELECTED_CATEGORY,
+        payload:categoryId
+    });
+}
+
+export const setLoadedProductsOffset = (offsetValue) =>(dispatch , getState) =>{
+    dispatch({
+        type : C.VIEW.LOADED_PRODUCTS_OFFSET,
+        payload:offsetValue
+    });
+}
+export const flushProductsArray = () =>(dispatch , getState) =>{
+    dispatch({
+        type : C.PRODUCTS.FLUSH_PRODUCTS_ARRAY,
+        payload:""
+    });
+}
 
 
 
-
-export const fetchProductsByCategoryId = (categoryId) =>(dispatch,getState) =>{
-    fetch(serverURL + "action=fetchProductsByCategoryId&categoryId="+categoryId)
+export const fetchProductsByCategoryId = (categoryId,loadedProductsOffset) =>(dispatch,getState) =>{
+    const url = `${serverURL}action=fetchProductsByCategoryId&categoryId=${categoryId}&loadedProductsOffset=${loadedProductsOffset}`
+    console.log(url);
+    fetch(url)    
     .then(response => response.json())
     .then(res => {
         dispatch({
@@ -68,6 +89,8 @@ export const fetchProductsByCategoryId = (categoryId) =>(dispatch,getState) =>{
 
     })
 }
+
+
 export const fetchRelatedItemsByProductId = (productId) =>(dispatch,getState) =>{
     fetch(serverURL + "action=fetchRelatedItemsByProductId&productId="+productId)
     .then(response => response.json())
@@ -100,8 +123,8 @@ export const fetchHomepageComponents = () =>(dispatch , getState) =>{
             productsArray.push(product)
         });
         dispatch({
-            type : C.PRODUCTS.UPDATE_PRODUCTS_LIST,
-            payload:productsArray
+            type : C.CATEGORY.FETCH_LIST_OF_CATEGORIES,
+            payload:res.categories
         });
     })
     .catch(err =>{
@@ -113,7 +136,6 @@ export const fetchListOfCategories = () =>(dispatch , getState) =>{
     fetch(serverURL + "action=fetchListOfCategories")
     .then(reponse => reponse.json())
     .then(res => {
-        console.log(res)
         dispatch({  
             type : C.CATEGORY.FETCH_LIST_OF_CATEGORIES,
             payload:res
