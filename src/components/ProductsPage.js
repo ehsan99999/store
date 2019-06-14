@@ -12,7 +12,7 @@ const mapStateToProps = (state,props) =>{
 const mapDispatchToProps = dispatch => {
 return{
     fetchProductsByCategoryId(categotyId){
-    dispatch(fetchProductsByCategoryId(categotyId))
+        dispatch(fetchProductsByCategoryId(categotyId))
     }
 }
 }

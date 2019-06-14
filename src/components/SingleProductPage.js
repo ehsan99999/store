@@ -30,7 +30,8 @@ const mapStateToProps = (state,props) =>{
   const mapDispatchToProps = dispatch => {
     return{
         fetchProductById(productId){
-            dispatch(fetchProductById(productId))
+            let result = dispatch(fetchProductById(productId));
+            return result;
         },
         addItemToCart(product){
             dispatch(addItemToCart(product))
@@ -105,7 +106,13 @@ class SingleProductPage extends Component{
         let product = this.props.products.filter(product => product.id === productId)[0];
 
         if(product === undefined){
-            this.props.fetchProductById(productId);
+            let fetchResult  = this.props.fetchProductById(productId);
+            if (!fetchResult.isResolved){
+                return(
+                   <center><br/><br/><h3 className="text-danger">Failed to connect to server</h3></center>
+                )
+            }
+
             return(
                 <img src="https://wpamelia.com/wp-content/uploads/2018/11/ezgif-2-6d0b072c3d3f.gif" />
             )
@@ -215,7 +222,6 @@ class SingleProductPage extends Component{
         let ratingVal =  (Math.random() * (5 - 3.5) + 3.5).toFixed(1);
 
 
-        console.log(this.props)
 
         return(
             <div className="singleProductPage">

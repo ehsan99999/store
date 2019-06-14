@@ -1,22 +1,68 @@
 import C from './constants'
 import fetch from 'isomorphic-fetch'
+import { ProductService } from '../services/product.service'
+import { CategoryService } from '../services/category.service'
 let serverURL = "http://localhost:3001/?";
 
 
-export const fetchProductById = (productId) =>(dispatch , getState) =>{
-    fetch(serverURL + "action=fetchProductById&productId="+productId )
-    .then(reponse => reponse.json())
-    .then(res => {
+
+export const fetchProductById = (productId) => async (dispatch , getState) =>{
+    try{
+        let product = await ProductService.getById(productId);
         dispatch({
-            type : C.PRODUCTS.FETCH_PRODUCT_BY_ID,
-            payload:res
+            type: C.PRODUCTS.FETCH_PRODUCT_BY_ID,
+            payload: product
         });
-    })
-    .catch(err =>{
-        //TODO handel error
-        console.log(err);
-    })
+    }catch(error){
+        return new Error(error)
+
+    }
 }
+
+export const fetchProductsByCategoryId = (categoryId,loadedProductsOffset,searchKey,sortBy) => async (dispatch,getState) =>{
+    try{
+        let products = await ProductService.getByCategoryId(categoryId,loadedProductsOffset,searchKey,sortBy);
+        dispatch({
+            type: C.PRODUCTS.FETCH_PRODUCTS_BY_CATEGORY_ID,
+            payload: products
+        });
+    }catch(error){
+        return new Error(error)
+
+    }
+}
+
+
+
+export const fetchRelatedItemsByProductId = (productId) => async (dispatch,getState) => {
+    try{
+        let products = await ProductService.getRelateProductsByProductId(productId);
+        dispatch({
+            type: C.PRODUCTS.FETCH_RELATED_ITEMS_BY_PRODUCT_ID,
+            payload: products
+        });
+    }catch(error){
+        return new Error(error)
+
+    }
+}
+
+
+export const fetchListOfCategories = () => async (dispatch , getState) =>{
+    try{
+        let categories = await CategoryService.getAll();
+        dispatch({
+            type: C.CATEGORY.FETCH_LIST_OF_CATEGORIES,
+            payload: categories
+        });
+    }catch(error){
+        return new Error(error)
+
+    }
+
+}
+
+
 export const addItemToCart = (product) =>(dispatch , getState) =>{
     console.log(product)
     dispatch({
@@ -82,33 +128,7 @@ export const flushProductsArray = () =>(dispatch , getState) =>{
 
 
 
-export const fetchProductsByCategoryId = (categoryId,loadedProductsOffset,searchKey,sortBy) =>(dispatch,getState) =>{
-    console.log(sortBy)
-    const url = `${serverURL}action=fetchProductsByCategoryId&categoryId=${categoryId}&loadedProductsOffset=${loadedProductsOffset}&searchKey=${searchKey}&sortBy=${sortBy}`
-    console.log(url);
-    fetch(url)    
-    .then(response => response.json())
-    .then(res => {
-        dispatch({
-            type : C.PRODUCTS.FETCH_PRODUCTS_BY_CATEGORY_ID,
-            payload:res
-        });
 
-    })
-}
-
-
-export const fetchRelatedItemsByProductId = (productId) =>(dispatch,getState) =>{
-    fetch(serverURL + "action=fetchRelatedItemsByProductId&productId="+productId)
-    .then(response => response.json())
-    .then(res => {
-        dispatch({
-            type : C.PRODUCTS.FETCH_RELATED_ITEMS_BY_PRODUCT_ID,
-            payload:res
-        });
-
-    })
-}
 
 export const fetchHomepageComponents = () =>(dispatch , getState) =>{
     fetch(serverURL + "action=fetchHomepageComponents")
@@ -132,20 +152,6 @@ export const fetchHomepageComponents = () =>(dispatch , getState) =>{
         dispatch({
             type : C.CATEGORY.FETCH_LIST_OF_CATEGORIES,
             payload:res.categories
-        });
-    })
-    .catch(err =>{
-        //TODO handel error
-        console.log(err);
-    })
-}
-export const fetchListOfCategories = () =>(dispatch , getState) =>{
-    fetch(serverURL + "action=fetchListOfCategories")
-    .then(reponse => reponse.json())
-    .then(res => {
-        dispatch({  
-            type : C.CATEGORY.FETCH_LIST_OF_CATEGORIES,
-            payload:res
         });
     })
     .catch(err =>{

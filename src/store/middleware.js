@@ -6,7 +6,7 @@ import { createStore, applyMiddleware } from "redux"
 const consoleMessages = store => next => action => {
     //console.log("old : ",JSON.stringify(store.getState()));
     let results = next(action);
-    console.log("new : ",(store.getState()));
+    //console.log("new : ",(store.getState()));
     return results;
 }
 
