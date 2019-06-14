@@ -96,7 +96,6 @@ class CatalogPage extends Component {
         e.preventDefault();
         this.props.flushProductsArray();
         this.props.fetchProductsByCategoryId(this.props.selectedCategory,this.props.loadedProductsOffset,this.state.searchKey,this.props.sortBy);
-        alert("0")
     }
     changeSearchKey(e){
         this.setState({"searchKey":e.target.value})
@@ -170,26 +169,28 @@ class CatalogPage extends Component {
         return (
             <div className="catalogPage">
                 <SiteHeader />
-                <div className="row mt-5 mx-0 " >
-                    <div className="col-12 ">
-                        <nav className="bg-light d-flex flex-row-reverse flex-row  ">
-                                <div className="mx-3">
-                                    <form className="" onSubmit={this.formPreventDefault}>
-                                        <div className="input-group">
-                                            <input type="text" className="form-control" value={this.state.searchKey} placeholder="Search" onChange={this.changeSearchKey}/>
-                                            <div className="input-group-btn">
-                                            <button className="btn btn-default" type="submit" onClick={this.search}>
-                                                <FontAwesomeIcon icon={faSearch} className="" />
-                                            </button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>{/* SearchBar */}
-                                
-                                <SortComponent  setSortMethod={this.setSortMethod} sortBy={this.props.sortBy}  />
+                <div className="headerMargin  w-100  ">
+                    <nav className="bg-light  ">
+                        <div className="d-flex flex-row-reverse flex-row ">
+                            <form className="" onSubmit={this.formPreventDefault}>
+                                <div class="searchbar bg-info mx-1">
+                                    <input class="search_input text-light "
+                                            type="text"
+                                            name="" 
+                                            value={this.state.searchKey} 
+                                            placeholder="Search..." 
+                                            onChange={this.changeSearchKey} />
 
-                        </nav>
-                    </div>{/* Div Navbar  */}
+                                    <button type="submit" class="search_icon" onClick={this.search}><FontAwesomeIcon icon={faSearch} className="" /></button>
+                                </div>
+                            </form>
+                            <SortComponent  setSortMethod={this.setSortMethod} sortBy={this.props.sortBy}  />
+
+                        </div>
+
+                    </nav>
+                </div>{/* Div Navbar  */}
+                <div className="row  mx-0 " >
                     <div className="col-3 ">
                         <ul className=" categoriesList list-group list-group-flush  ">
                             {categoriesJsx}
@@ -213,7 +214,6 @@ class CatalogPage extends Component {
 }
 
 function SortComponent({setSortMethod,sortBy}){
-    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",sortBy);
     let sortByJsx;
      
     switch (sortBy) {

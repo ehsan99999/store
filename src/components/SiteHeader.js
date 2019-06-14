@@ -33,7 +33,7 @@ class SiteHeader extends Component{
 
                             </li>
                             <li className="navbar-item ">
-                                <NavLink className="nav-link" exact  to={`catalog/`}>Catalog</NavLink>
+                                <NavLink className="nav-link" exact  to={`/catalog/`}>Catalog</NavLink>
 
                             </li>
                             <li className="navbar-item ">
@@ -46,7 +46,7 @@ class SiteHeader extends Component{
                                 <a className="nav-link disabled" href="#">Connect</a>
                             </li>
                             <li className="navbar-item ">
-                                <NavLink className="nav-link" exact  to={`cart/`}><FontAwesomeIcon icon={faShoppingCart} />[{this.props.listOfAllProductsInCart.length}]</NavLink>
+                                <NavLink className="nav-link" exact  to={`/cart/`}><FontAwesomeIcon icon={faShoppingCart} />[{this.props.listOfAllProductsInCart.length}]</NavLink>
                             </li>
                         </ul>
                     </div>

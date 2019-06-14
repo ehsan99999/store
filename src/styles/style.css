@@ -22,7 +22,7 @@ html, body{
 }
 
 .headerMargin{
-  margin-top:35px;
+  margin-top:54px;
 }
 
 
@@ -325,6 +325,50 @@ hr.thickShortLine {
 
 }
 
+.catalogPage .searchbar{
+  margin-bottom: auto;
+  margin-top: auto;
+  height: 40px;
+  background-color: #353b48;
+  border-radius: 5px;
+  padding: 0px;
+  }
+
+  .catalogPage .search_input{
+  color: white;
+  border: 0;
+  outline: 0;
+  background: none;
+  width: 0;
+  caret-color:transparent;
+  line-height: 40px;
+  transition: width 0.4s linear;
+  }
+
+  .catalogPage .searchbar:hover > .search_input{
+  padding: 0 10px;
+  width: 250px;
+  caret-color:red;
+  transition: width 0.4s linear;
+  }
+
+  .catalogPage .searchbar:hover > .search_icon{
+  background: white;
+  color: #e74c3c;
+  }
+
+  .catalogPage .search_icon{
+  height: 40px;
+  width: 40px;
+  float: right;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  color:white;
+  background-color: #ffffff00;
+  border: 0px;
+  }
 
 
 
