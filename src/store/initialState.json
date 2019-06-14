@@ -63,7 +63,8 @@
 	},
 	"view" : {
 		"selectedCategory" : -1 , 
-		"loadedProductsOffset" : 0
+		"loadedProductsOffset" : 0,
+		"sortBy" : ""
 		
 	}
 

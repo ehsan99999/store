@@ -82,6 +82,8 @@ export const view = (state ={} , action) =>{
             return state = {...state,selectedCategory:action.payload} 
         case C.VIEW.LOADED_PRODUCTS_OFFSET:
             return state = {...state,loadedProductsOffset:action.payload} 
+        case C.VIEW.SET_SORT_BY:
+            return state = {...state,sortBy:action.payload} 
         default:
                 return state;
         }

@@ -67,6 +67,12 @@ export const setLoadedProductsOffset = (offsetValue) =>(dispatch , getState) =>{
         payload:offsetValue
     });
 }
+export const setSortBy = (sortBy) =>(dispatch , getState) =>{
+    dispatch({
+        type : C.VIEW.SET_SORT_BY,
+        payload:sortBy
+    });
+}
 export const flushProductsArray = () =>(dispatch , getState) =>{
     dispatch({
         type : C.PRODUCTS.FLUSH_PRODUCTS_ARRAY,
@@ -76,8 +82,9 @@ export const flushProductsArray = () =>(dispatch , getState) =>{
 
 
 
-export const fetchProductsByCategoryId = (categoryId,loadedProductsOffset) =>(dispatch,getState) =>{
-    const url = `${serverURL}action=fetchProductsByCategoryId&categoryId=${categoryId}&loadedProductsOffset=${loadedProductsOffset}`
+export const fetchProductsByCategoryId = (categoryId,loadedProductsOffset,searchKey,sortBy) =>(dispatch,getState) =>{
+    console.log(sortBy)
+    const url = `${serverURL}action=fetchProductsByCategoryId&categoryId=${categoryId}&loadedProductsOffset=${loadedProductsOffset}&searchKey=${searchKey}&sortBy=${sortBy}`
     console.log(url);
     fetch(url)    
     .then(response => response.json())

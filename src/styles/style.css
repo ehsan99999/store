@@ -145,7 +145,6 @@ html, body{
 .welcome{
   width: 75%;
   margin: 0 auto;
-  padding-top:2rem;
 }
 
 .welcome hr{
@@ -358,6 +357,11 @@ hr.thickShortLine {
 	opacity: 1;				
 }
 
+.dropDownSvgIcon{
+  width: 20px;
+  padding: 0px;
+  margin: 0px;
+}
 
 [class^="col-"]{
   padding: 0.5rem;
