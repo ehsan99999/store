@@ -96,7 +96,7 @@ class CatalogPage extends Component {
         e.preventDefault();
         this.props.flushProductsArray();
         this.props.fetchProductsByCategoryId(this.props.selectedCategory,this.props.loadedProductsOffset,this.state.searchKey,this.props.sortBy);
-
+        alert("0")
     }
     changeSearchKey(e){
         this.setState({"searchKey":e.target.value})
