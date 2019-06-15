@@ -5,12 +5,10 @@ import  ProductCard  from "./ProductCard";
 import  SiteHeader  from "./SiteHeader";
 import  Foooter  from "./Foooter";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch,faDollarSign, faStarHalfAlt,faSortAmountDown,faCog} from '@fortawesome/free-solid-svg-icons'
-import dollarSignDown from '../img/dollarSignDown.png'
-import dollarSignUp from '../img/dollarSignUp.png'
+import { faSearch,faCog} from '@fortawesome/free-solid-svg-icons'
 
 
-const mapStateToProps = (state,props) =>{
+const mapStateToProps = (state) =>{
     return {
         categories : state.categories,
         products : state.products,
@@ -20,18 +18,15 @@ const mapStateToProps = (state,props) =>{
     }
   }
   
-  const mapDispatchToProps = (dispatch,state) => {
+  const mapDispatchToProps = (dispatch) => {
     return{
         fetchListOfCategories(){
             dispatch(fetchListOfCategories())
         },
         fetchProductsByCategoryId(categoryId,loadedProductsOffset,searchKey,sortBy){
-            console.log(sortBy);
-
             dispatch(fetchProductsByCategoryId(categoryId,loadedProductsOffset,searchKey,sortBy))
         },
         setSelectedCategory(categoryId,loadedProductsOffset,sortBy){
-            console.log(this)
             dispatch(setLoadedProductsOffset(0));
             dispatch(setSelectedCategory(categoryId,loadedProductsOffset));
             dispatch(flushProductsArray());
@@ -45,7 +40,6 @@ const mapStateToProps = (state,props) =>{
             dispatch(setSortBy(sortBy));
         },
         setLoadedProductsOffset(loadedProductsOffset,selectedCategory,searchKey,sortBy){
-            console.log(selectedCategory)
             dispatch(setLoadedProductsOffset(loadedProductsOffset));
             dispatch(fetchProductsByCategoryId(selectedCategory,loadedProductsOffset,searchKey,sortBy));
 
@@ -71,20 +65,10 @@ class CatalogPage extends Component {
 
     }
     fetchProductsByCategory (categoryId,loadedProductsOffset){
-        //this.props.setSelectedCategory(categoryId,loadedProductsOffset);
-        this.props.fetchProductsByCategoryId(categoryId,loadedProductsOffset,this.state.searchKey,this.props.sortBy);
-        console.log(this.state)
-
-        
+        this.props.fetchProductsByCategoryId(categoryId,loadedProductsOffset,this.state.searchKey,this.props.sortBy);       
     }
     loadMore(){
-        console.log(this.props.loadedProductsOffset)
-
         this.props.setLoadedProductsOffset(this.props.loadedProductsOffset+1,this.props.selectedCategory,this.state.searchKey,this.props.sortBy);
-        console.log(this.props.loadedProductsOffset)
-
-        //this.props.fetchProductsByCategoryId(this.props.selectedCategory,this.props.loadedProductsOffset);
-
     }
     formPreventDefault(e) {
         this.search(e)
@@ -120,10 +104,6 @@ class CatalogPage extends Component {
 
     render(){
         //TODO Add favorites 
-        /*TODO add search
-            - add Timer            
-        */
-
         console.log(this.props)
         if(this.props.categories.length === 0 ){
             this.props.fetchListOfCategories();
@@ -139,7 +119,7 @@ class CatalogPage extends Component {
             "parentId": 0
         });
 
-        let categoriesJsx = categoriesList.map((category,index ) => {
+        let categoriesJsx = categoriesList.map((category ) => {
             let active = "";
             if (this.props.selectedCategory === category.id){
                 active = "activeli";
@@ -201,9 +181,13 @@ class CatalogPage extends Component {
                             </li>
 
                             <li className="nav-item d-block d-md-none">
-                                <form className="form-inline  input-group my-2 my-lg-0">
-                                <input className="form-control btn-outline-info mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
-                                <button className="btn btn-outline-info input-group-append " type="submit"><FontAwesomeIcon icon={faSearch} className="" /></button>
+                                <form className="form-inline  input-group my-2 my-lg-0" onSubmit={this.formPreventDefault}>
+                                    <input className="form-control btn-outline-info mr-sm-2" type="search"
+                                            placeholder="Search" aria-label="Search"
+                                            value={this.state.searchKey} 
+                                            placeholder="Search..." 
+                                            onChange={this.changeSearchKey}/>
+                                    <button className="btn btn-outline-info input-group-append " onClick={this.search} type="submit"><FontAwesomeIcon icon={faSearch} className="" /></button>
                                 </form>
                             </li>
                             <li className="nav-item dropdown d-block d-md-none">
@@ -272,66 +256,19 @@ function SortComponentSmall({setSortMethod,sortBy}){
     }
     
     return(
-        <div class="dropdown">
-            <button class="btn btn-outline-info dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <div className="dropdown">
+            <button className="btn btn-outline-info dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 {sortByJsx}
             </button>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item text-info"  onClick={()=>{setSortMethod("priceLowToHigh")}}>Price: Low to High</a>
-                <a class="dropdown-item text-info"  onClick={()=>{setSortMethod("priceHighToLow")}}>Price: High To Low</a>
-                <a class="dropdown-item text-info"  onClick={()=>{setSortMethod("ratingHighToLow")}}>Price: Rating</a>
-                <a class="dropdown-item text-info"  onClick={()=>{setSortMethod("")}}>Default</a>
+            <div className="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                <a className="dropdown-item text-info"  onClick={()=>{setSortMethod("priceLowToHigh")}}>Price: Low to High</a>
+                <a className="dropdown-item text-info"  onClick={()=>{setSortMethod("priceHighToLow")}}>Price: High To Low</a>
+                <a className="dropdown-item text-info"  onClick={()=>{setSortMethod("ratingHighToLow")}}>Price: Rating</a>
+                <a className="dropdown-item text-info"  onClick={()=>{setSortMethod("")}}>Default</a>
             </div>
         </div>
 
 
-    )
-}
-
-function SortComponent({setSortMethod,sortBy}){
-    let sortByJsx;
-     
-    switch (sortBy) {
-        case "priceLowToHigh":
-                sortByJsx =  (<span className="align-middle">
-                            <img src={dollarSignUp} width={25} height={25}  /> 
-                        </span>);
-                break;
-        case "priceHighToLow":
-                sortByJsx = (<span className="align-middle">
-                    <img src={dollarSignDown} width={25} height={25}  />
-                </span>);
-                break;
-        case "ratingHighToLow":
-                sortByJsx = (<FontAwesomeIcon icon={faStarHalfAlt} className="mr-2" />)
-                break;
-
-        default:
-                sortByJsx = (<FontAwesomeIcon icon={faSortAmountDown} className="" />)
-                break;
-
-    }
-    
-    return(
-        <div className="btn-group">
-            <i type="button" className="btn btn-sm btn-info dropdown-toggle align-middle " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {/* <FontAwesomeIcon icon={faSortAmountDown} className="" /> */}
-                {/* <img src={upArrow} width={20} height={20} fill-color="#ffffff" /> */}
-                {sortByJsx}
-            </i>
-            <div className="dropdown-menu ">
-                <a className="dropdown-item text-info" onClick={()=>{setSortMethod("priceLowToHigh")}}>
-                    <FontAwesomeIcon icon={faDollarSign} className="mr-2" /> Low to High
-                </a>
-                <a className="dropdown-item text-info"  onClick={()=>{setSortMethod("priceHighToLow")}} >
-                    <FontAwesomeIcon icon={faDollarSign} className="mr-2" /> High To Low
-                </a>
-                <div className="dropdown-divider"></div>
-                <a className="dropdown-item text-info" onClick={()=>{setSortMethod("ratingHighToLow")}}>
-                    <FontAwesomeIcon icon={faStarHalfAlt} className="mr-2" /> Rating
-                </a>
-            </div>
-        </div>
     )
 }
 
@@ -339,7 +276,7 @@ function Products({products,title}){
     if(products.length === 0){
         return (<img src="https://wpamelia.com/wp-content/uploads/2018/11/ezgif-2-6d0b072c3d3f.gif" /> );
     }
-    let productsJsx = products.map((product,index) => {
+    let productsJsx = products.map((product) => {
         return (<ProductCard  key={"loaddedProduct-"+product.id} product = {product} />)
     });
     let titleJsx = (title === undefined)?
