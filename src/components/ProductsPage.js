@@ -31,14 +31,14 @@ class ProductsPage extends Component {
             this.props.products.map(product => {
                 return(
                     <div  key={product.id}>
-                        <img src={C.STORE_SETTINGS.IMAGES_URL + "products/"+product.images[0]} />
+                        <img src={C.STORE_SETTINGS.IMAGES_URL + "products/"+product.images[0]} alt={product.productTitle} />
                     </div>
                 )
                 })
         ):
         (
              <div className="App">
-                <img src="https://wpamelia.com/wp-content/uploads/2018/11/ezgif-2-6d0b072c3d3f.gif" />
+                <img src="https://wpamelia.com/wp-content/uploads/2018/11/ezgif-2-6d0b072c3d3f.gif" alt="loading gif" />
             </div>
         )
         return (

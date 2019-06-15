@@ -28,11 +28,11 @@ class ProductCard extends Component{
 										<b to="#" className="categoryLink">LIFESTYLE</b>
 									</div>
 									<div className="text-right  w-50 "  >
-										<img src={fullStar} className="star" />
-										<img src={fullStar} className="star" />
-										<img src={fullStar} className="star" />
-										<img src={halfStar} className="star" />
-										<img src={emptyStar} className="star" />
+										<img src={fullStar} className="star" alt="rating star" />
+										<img src={fullStar} className="star" alt="rating star"  />
+										<img src={fullStar} className="star" alt="rating star"  />
+										<img src={halfStar} className="star" alt="rating star"  />
+										<img src={emptyStar} className="star" alt="rating star"  />
 									</div>
 								</div>
 								<h5 className="card-title text-dark text-left">{productTitle}</h5>

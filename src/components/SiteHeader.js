@@ -37,13 +37,10 @@ class SiteHeader extends Component{
 
                             </li>
                             <li className="navbar-item ">
-                                <a className="nav-link disabled" href="#">About</a>
+                                <NavLink className="nav-link disabled" to={`/About/`}>About</NavLink>
                             </li>
                             <li className="navbar-item ">
-                                    <a className="nav-link disabled" href="#">Blog</a>
-                            </li>
-                            <li className="navbar-item ">
-                                <a className="nav-link disabled" href="#">Connect</a>
+                                <NavLink className="nav-link disabled" to={`/Contact/`}>Contact Us</NavLink>
                             </li>
                             <li className="navbar-item ">
                                 <NavLink className="nav-link" exact  to={`/cart/`}><FontAwesomeIcon icon={faShoppingCart} />[{this.props.listOfAllProductsInCart.length}]</NavLink>

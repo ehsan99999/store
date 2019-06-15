@@ -183,7 +183,7 @@ class CatalogPage extends Component {
                             <li className="nav-item d-block d-md-none">
                                 <form className="form-inline  input-group my-2 my-lg-0" onSubmit={this.formPreventDefault}>
                                     <input className="form-control btn-outline-info mr-sm-2" type="search"
-                                            placeholder="Search" aria-label="Search"
+                                            aria-label="Search"
                                             value={this.state.searchKey} 
                                             placeholder="Search..." 
                                             onChange={this.changeSearchKey}/>
@@ -191,9 +191,9 @@ class CatalogPage extends Component {
                                 </form>
                             </li>
                             <li className="nav-item dropdown d-block d-md-none">
-                                <a className="btn btn-outline-info text-info w-100  nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button className="btn border-info text-info w-100  nav-link dropdown-toggle" href="#" id="navbarDropdown"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Categories
-                                </a>
+                                </button>
                                     <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                                         {categoriesJsx}
                                     </ul>
@@ -260,12 +260,12 @@ function SortComponentSmall({setSortMethod,sortBy}){
             <button className="btn btn-outline-info dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 {sortByJsx}
             </button>
-            <div className="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                <a className="dropdown-item text-info"  onClick={()=>{setSortMethod("priceLowToHigh")}}>Price: Low to High</a>
-                <a className="dropdown-item text-info"  onClick={()=>{setSortMethod("priceHighToLow")}}>Price: High To Low</a>
-                <a className="dropdown-item text-info"  onClick={()=>{setSortMethod("ratingHighToLow")}}>Price: Rating</a>
-                <a className="dropdown-item text-info"  onClick={()=>{setSortMethod("")}}>Default</a>
-            </div>
+            <ul className="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                <li className="dropdown-item text-info"  onClick={()=>{setSortMethod("priceLowToHigh")}}>Price: Low to High</li>
+                <li className="dropdown-item text-info"  onClick={()=>{setSortMethod("priceHighToLow")}}>Price: High To Low</li>
+                <li className="dropdown-item text-info"  onClick={()=>{setSortMethod("ratingHighToLow")}}>Price: Rating</li>
+                <li className="dropdown-item text-info"  onClick={()=>{setSortMethod("")}}>Default</li>
+            </ul>
         </div>
 
 
@@ -274,7 +274,7 @@ function SortComponentSmall({setSortMethod,sortBy}){
 
 function Products({products,title}){
     if(products.length === 0){
-        return (<img src="https://wpamelia.com/wp-content/uploads/2018/11/ezgif-2-6d0b072c3d3f.gif" /> );
+        return (<img src="https://wpamelia.com/wp-content/uploads/2018/11/ezgif-2-6d0b072c3d3f.gif" alt="loading gif" /> );
     }
     let productsJsx = products.map((product) => {
         return (<ProductCard  key={"loaddedProduct-"+product.id} product = {product} />)

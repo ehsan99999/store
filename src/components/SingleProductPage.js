@@ -77,6 +77,8 @@ class SingleProductPage extends Component{
                     numberOfUnits : this.state.numberOfUnits - 1
                 });
                 break;
+            default:
+                break;
         }
 
     }
@@ -114,7 +116,7 @@ class SingleProductPage extends Component{
             }
 
             return(
-                <img src="https://wpamelia.com/wp-content/uploads/2018/11/ezgif-2-6d0b072c3d3f.gif" />
+                <img src="https://wpamelia.com/wp-content/uploads/2018/11/ezgif-2-6d0b072c3d3f.gif" alt="loading gif" />
             )
         }
         let relatedProducts = this.props.products.filter(item => {
@@ -239,8 +241,8 @@ class SingleProductPage extends Component{
                     <Rating 
                         readonly
                         initialRating={ratingVal}
-                        emptySymbol={<img src={emptyStar} className="icon" />}
-                        fullSymbol={<img src={ fullStar} className="icon" />}
+                        emptySymbol={<img src={emptyStar} className="icon" alt="raing icon" />}
+                        fullSymbol={<img src={ fullStar} className="icon" alt="raing icon"  />}
                     /> <small> ({ratingVal} / 5 ) X {product.numberOfRates}</small>
 
                     <ul id="singleProductPageTab1" className="nav nav-tabs my-2">
@@ -271,8 +273,8 @@ class SingleProductPage extends Component{
                             numberOfUnits={this.state.numberOfUnits}
                           />
 
-                        <a 
-                            className={`addToCartComponent float-left rounded-pill align-middle  text-white px-3 py-2 ${(this.props.isItemInCart)? " bg-primary " : " bg-success "}`}
+                        <button 
+                            className={`addToCartComponent float-left rounded-pill align-middle border-0 text-white px-3 py-2 ${(this.props.isItemInCart)? " bg-primary " : " bg-success "}`}
                             onClick={
 
                                     () => this.cartAddRemoveProduct(product)
@@ -282,10 +284,10 @@ class SingleProductPage extends Component{
                                             (<div><FontAwesomeIcon icon={faCheck} className="text-white" /> Added to Cart</div>):
                                             (<div><FontAwesomeIcon icon={faPlus} className="text-white" /> Add to Cart</div>)}
                             
-                        </a>
-                        <a onClick={() => this.props.toggleFavorite(productId)} className="CartFavItem float-left mx-2 rounded-circle align-middle " >
+                        </button>
+                        <button onClick={() => this.props.toggleFavorite(productId)} className="CartFavItem border-0 float-left mx-2 rounded-circle align-middle " >
                             <FontAwesomeIcon icon={faHeart} className={(isFavorite)? "text-danger":"text-secondary"}  />
-                        </a>
+                        </button>
                     </div>
 
 
@@ -323,7 +325,7 @@ class SingleProductPage extends Component{
 
 function ProductPageSlider({product}) {
     let productThumbsJsx = product.images.map((image,index) =>{
-        let active = (index == 0)? " active " : "";
+        let active = (index === 0)? " active " : "";
         return (
                 <li key={`productThumb${index}`} className={`float-left ${active}`} >
                     <a data-toggle="tab" href={`#thumb${index}`} >
@@ -333,7 +335,7 @@ function ProductPageSlider({product}) {
             )
     });
     let productImagesJsx = product.images.map((image,index) =>{
-        let active = (index == 0)? " active " : "";
+        let active = (index === 0)? " active " : "";
         return (
                 <div key={`productImg${index}`} id={`thumb${index}`}  className={`tab-pane fadeIn ${active}`} >
                     <img className="img-fluid"  src={PRODUCT_IMG_URL+image} alt={product.productTitle}  />

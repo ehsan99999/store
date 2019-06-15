@@ -38,9 +38,9 @@ const Foooter = () => {
 				<p>City , State , 00000</p>
 				<p>City , State , 00000</p>
 				<p>
-					<a className="socialIcon" href="#"><FontAwesomeIcon icon={faInstagram} /></a>
-					<a className="socialIcon" href="#"><FontAwesomeIcon icon={faTwitter} /></a>
-					<a className="socialIcon" href="#"><FontAwesomeIcon icon={faFacebookSquare} /></a>
+					<span className="socialIcon" href="#"><FontAwesomeIcon icon={faInstagram} /></span>
+					<span className="socialIcon" href="#"><FontAwesomeIcon icon={faTwitter} /></span>
+					<span className="socialIcon" href="#"><FontAwesomeIcon icon={faFacebookSquare} /></span>
 				</p>
 			</div>
 			<div className="col-12">

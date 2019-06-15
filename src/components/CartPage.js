@@ -47,10 +47,9 @@ class CartPage extends Component{
 
     modifyNumberOfUnits = (action,productId)=>{
         let product = this.props.listOfAllProductsInCart.filter(product => {
-            console.log(product.id,productId);
-
-            if(product.id === productId) 
+            if(product.id === productId){
                 return product;
+            } 
         })[0];
         
         switch (action) {
@@ -62,6 +61,8 @@ class CartPage extends Component{
                     return;
                     product.numberOfUnits--;
                 break;
+            default:
+                break;
         }
         this.props.updateNumberOfUnitsAndShippingMethodForOneItemInCart(product)
     }
@@ -69,7 +70,7 @@ class CartPage extends Component{
         var shippingOption = parseInt(event.target.value);
         var index = event.target.selectedIndex;
         var optionElement = event.target.childNodes[index]
-        var productId =  parseInt(optionElement.getAttribute('data-id'));
+        productId =  parseInt(optionElement.getAttribute('data-id'));
 
         let product = this.props.listOfAllProductsInCart.filter(product => {
             if(product.id === productId) 
@@ -112,7 +113,7 @@ class CartPage extends Component{
             return(
                 <tr className="align-middle" key={"product"+product.id+"InCart"} >
                     <td className="px-2 align-middle" >
-                        <img className=" productThumb  ImgScaleDown productThumb" src={PRODUCT_IMG_URL+product.productImage} />
+                        <img className=" productThumb  ImgScaleDown productThumb" src={PRODUCT_IMG_URL+product.productImage} alt={product.productImage} />
                     </td>
                     <td className="pr-3 pl-2 align-middle ">
                         <p className="">{product.productTitle}</p>
@@ -142,7 +143,7 @@ class CartPage extends Component{
                 <SiteHeader />
                 <div className="headerMargin row container-fluid mx-0">
                     <div className="col-12">
-                        <div class="table-responsive">
+                        <div className="table-responsive">
                             <table id="productsInCart" className="my-3 table  table-hover m-auto">
                                 <thead className="">
                                     <tr>
@@ -198,6 +199,7 @@ function OrderSummary({listOfAllProductsInCart}) {
         ];
         let shippingCost = shippingOptions[product.shippingOption] * product.numberOfUnits;
         subTotalCost += itemCost + shippingCost;
+        return product;
     })
     let totalCost = ((subTotalCost * TAX_RATE)/100) + subTotalCost;
     return(
@@ -215,9 +217,9 @@ function OrderSummary({listOfAllProductsInCart}) {
                         <div>Total</div> <div className="ml-auto">${totalCost}</div>
                     </li>
                     <li className="list-group-item">
-                        <a className="text-primary" data-toggle="collapse" data-target="#promoDiv">
+                        <span className="text-primary" data-toggle="collapse" data-target="#promoDiv">
                             Apply promo code <FontAwesomeIcon icon={faChevronDown} className="fontAwesomeIcon" /> 
-                        </a>
+                        </span>
                         <div id="promoDiv" className="collapse">
                         <div className="input-group input-group-sm mb-3">
                             <input 

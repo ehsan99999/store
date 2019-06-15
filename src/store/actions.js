@@ -142,13 +142,14 @@ export const fetchHomepageComponents = () =>(dispatch , getState) =>{
         let productsArray = [];
         res.featuredProducts.map(category => {
             let categoryKey = Object.keys(category)[0];
-            category[categoryKey].map(product => {
+            category[categoryKey].map(product => 
                 productsArray.push(product)
-            });
+            );
+            return category
         });
-        res.todayDeals.map(product => {
+        res.todayDeals.map(product => 
             productsArray.push(product)
-        });
+        );
         dispatch({
             type : C.CATEGORY.FETCH_LIST_OF_CATEGORIES,
             payload:res.categories

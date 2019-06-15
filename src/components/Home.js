@@ -1,7 +1,5 @@
 import React, { Component }  from 'react';
 import {connect } from 'react-redux'
-import { NavLink } from "react-router-dom";
-
 import {fetchHomepageComponents} from '../store/actions'
 import  FeaturedCategories  from "./FeaturedCategories";
 import  FeaturedProducts  from "./FeaturedProducts";
@@ -13,7 +11,7 @@ import  ThreeColumnSection  from "./ThreeColumnSection";
 import  InstagramTesimonials  from "./InstagramTesimonials";
 import  Foooter  from "./Foooter";
 
-const mapStateToProps = (state,props) =>{
+const mapStateToProps = (state) =>{
     return {
       homePageComponents : state.homePageComponents
     }
@@ -38,7 +36,7 @@ const mapStateToProps = (state,props) =>{
         let content = (Object.keys(this.props.homePageComponents).length === 0)? (
             //Show loading
             <div className="App">
-                <img src="https://wpamelia.com/wp-content/uploads/2018/11/ezgif-2-6d0b072c3d3f.gif" />
+                <img src="https://wpamelia.com/wp-content/uploads/2018/11/ezgif-2-6d0b072c3d3f.gif" alt="loading gif" />
             </div>
         ):(
             <div className="App">
@@ -59,10 +57,7 @@ const mapStateToProps = (state,props) =>{
               <hr/>
               <InstagramTesimonials />
               <Foooter />
-              
-            {/* <p>
-                <NavLink to="/categories"> Categories</NavLink>
-            </p> */}
+
             
 
             </div>

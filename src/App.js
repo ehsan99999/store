@@ -1,9 +1,6 @@
 import React from 'react';
 import './styles/App.css';
-import {connect } from 'react-redux'
 import { Component } from 'react';
-import {fetchProductById,fetchHomepageComponents} from './store/actions'
-import FeaturedCategories from "./components/FeaturedCategories.js"
 import {BrowserRouter , Route, Switch} from 'react-router-dom'
 import Home from './components/Home'
 import ProductsPage from './components/ProductsPage'

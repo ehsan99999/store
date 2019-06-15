@@ -1,5 +1,4 @@
 import React, { Component }  from 'react';
-import { NavLink } from "react-router-dom";
 
 
 class FeaturedCategories extends Component{
@@ -17,7 +16,7 @@ class FeaturedCategories extends Component{
         //Carousel indicators
         let carouselIndicatorsJsx = [];
         for(i=0;i<categoriesChunks.length;i++){
-            let active = (i == 0)? "active" : "";
+            let active = (i === 0)? "active" : "";
             carouselIndicatorsJsx.push(<li key={"multiItemsCarousel"+i} data-target="#multiItemsCarousel" data-slide-to={i} className={"red " + active} ></li>);
         }
 
@@ -26,7 +25,7 @@ class FeaturedCategories extends Component{
                 return (
                     <div key={category.id} className="col-sm-6 col-md-3 col-lg-2 ">
                         <div className=" " >
-                                <img className="card-img-top" src={category.image} alt="Card image cap" />
+                                <img className="card-img-top" src={category.image} alt="Cardcap" />
                                 <div className="card-body">
                                     <h5 className="card-title">{category.name}</h5>
                                 </div>

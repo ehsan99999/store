@@ -5,7 +5,8 @@ class FeaturedProducts extends Component{
 
     render(){
         let productsListString = this.props.products.map((product,index) => {
-            if(index >= 4) return;
+            if(index >= 4) 
+                return(<span></span>);
             return(
               <ProductCard key={product.id} product = {product} />
 
