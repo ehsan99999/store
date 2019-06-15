@@ -55,6 +55,7 @@ const mapStateToProps = (state,props) =>{
   }
 
 class CatalogPage extends Component {
+    delayTimer;
     constructor(props){
         super(props);
         this.state = {searchKey: ''};
@@ -93,9 +94,17 @@ class CatalogPage extends Component {
         e.preventDefault();
         this.props.flushProductsArray();
         this.props.fetchProductsByCategoryId(this.props.selectedCategory,this.props.loadedProductsOffset,this.state.searchKey,this.props.sortBy);
+
     }
     changeSearchKey(e){
-        this.setState({"searchKey":e.target.value})
+        this.setState({"searchKey":e.target.value});
+        clearTimeout(this.delayTimer);
+        this.delayTimer = setTimeout(() => {
+            this.props.flushProductsArray();
+            this.props.fetchProductsByCategoryId(this.props.selectedCategory,this.props.loadedProductsOffset,this.state.searchKey,this.props.sortBy);
+    
+        }, 1500);
+
     }
 
     setSortMethod(sortMethod){
