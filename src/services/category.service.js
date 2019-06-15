@@ -16,4 +16,5 @@ class CategoryService {
 
 }
 
-module.exports.CategoryService = new CategoryService();
+const _CategoryService = new CategoryService();
+export { _CategoryService as CategoryService };

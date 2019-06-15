@@ -36,4 +36,5 @@ class ProductService {
     }
 }
 
-module.exports.ProductService = new ProductService();
+const _ProductService = new ProductService();
+export { _ProductService as ProductService };
